@@ -202,8 +202,44 @@ function extractEmails(str) {
  *             '└──────────┘\n'
  *
  */
-function getRectangleString(/* width, height */) {
-  throw new Error('Not implemented');
+function getRectangleString(width, height) {
+  let result = '';
+  for (let i = 0; i < height; i += 1) {
+    let temp = '';
+    for (let j = 0; j < width; j += 1) {
+      if (i === 0) {
+        if (j === 0) {
+          temp += '┌';
+        } else if (j === width - 1) {
+          temp += '┐';
+        } else {
+          temp += '─';
+        }
+      }
+
+      if (i > 0 && i < height - 1) {
+        if (j === 0 || j === width - 1) {
+          temp += '│';
+        } else {
+          temp += ' ';
+        }
+      }
+
+      if (i === height - 1) {
+        if (j === 0) {
+          temp += '└';
+        } else if (j === width - 1) {
+          temp += '┘';
+        } else {
+          temp += '─';
+        }
+      }
+    }
+
+    result += `${temp}\n`;
+  }
+
+  return result;
 }
 
 
@@ -223,8 +259,20 @@ function getRectangleString(/* width, height */) {
  *    => 'NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm'
  *
  */
-function encodeToRot13(/* str */) {
-  throw new Error('Not implemented');
+function encodeToRot13(str) {
+  const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+  const alphabetROT13 = 'NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm';
+  let result = '';
+
+  for (let i = 0; i < str.length; i += 1) {
+    if (alphabet.indexOf(str[i]) === -1) {
+      result += str[i];
+    } else {
+      result += `${alphabetROT13[alphabet.indexOf(str[i])]}`;
+    }
+  }
+
+  return result;
 }
 
 /**
@@ -240,8 +288,8 @@ function encodeToRot13(/* str */) {
  *   isString('test') => true
  *   isString(new String('test')) => true
  */
-function isString(/* value */) {
-  throw new Error('Not implemented');
+function isString(value) {
+  return typeof value === 'string' || value instanceof String;
 }
 
 
